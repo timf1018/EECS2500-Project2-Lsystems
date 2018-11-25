@@ -15,6 +15,14 @@ public class Rule {
         return rightArea;
     }
 
+    public void setLeftArea(String leftArea) {
+        this.leftArea = leftArea;
+    }
+
+    public void setRightArea(String rightArea) {
+        this.rightArea = rightArea;
+    }
+
     @Override
     public String toString() {
         return "Rule{" +

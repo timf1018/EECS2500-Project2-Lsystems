@@ -1,6 +1,5 @@
-import java.awt.Canvas;
 import java.awt.*;
-import java.awt.geom.*;
+import java.awt.geom.Line2D;
 
 /**
  *
@@ -12,8 +11,8 @@ import java.awt.geom.*;
 public class DrawingCanvas extends Canvas {
     protected String drawString;
     protected double angleIncrement;
-
-
+ArrayStack saveStackXY = new ArrayStack(20);
+    ArrayStack saveStackAngle = new ArrayStack(20);
     DrawingCanvas() {
         this.setPreferredSize(new Dimension(400, 400));
     }
@@ -45,6 +44,7 @@ public class DrawingCanvas extends Canvas {
         currentAngle = 0.0;
 
         for (position = 0; position < drawString.length(); position++) {
+            System.out.println("Processing position x: " + currentPositionX + " y " + currentPositionY);
             if (drawString.charAt(position) == 'F') { // Draw 5 units along current direction
                 Line2D line = new Line2D.Double(currentPositionX, currentPositionY,
                         currentPositionX + 5.0 * Math.sin(currentAngle),
@@ -57,9 +57,31 @@ public class DrawingCanvas extends Canvas {
             } else if (drawString.charAt(position) == '+') {
                 currentAngle += angleIncrement;
             } else if (drawString.charAt(position) == '[') {
+                try {
+                    saveStackXY.push(currentPositionX);
+                    saveStackXY.push(currentPositionY);
+                    saveStackAngle.push(currentAngle);
+                    System.out.println("Angle pushed = " + currentAngle);
+                    //System.out.println(position + " was pushed to position");
+                }
+                catch (StackOverflowException ex){
+                    System.out.println("Stack overflow");
+                }
 
             } else if (drawString.charAt(position) == ']') {
-
+                try {
+                    currentPositionY = Integer.parseInt(saveStackXY.top().toString());
+                    saveStackXY.pop();
+                    currentPositionX = Integer.parseInt(saveStackXY.top().toString());
+                    saveStackXY.pop();
+                    currentAngle = Double.parseDouble(saveStackAngle.top().toString());
+                    saveStackAngle.pop();
+                    System.out.println("Angle popped = " + currentAngle);
+                }
+                catch (StackUnderflowException ex){
+                    System.out.println("Stack underflow");
+                }
+                //System.out.println(position + "   " + currentAngle);
             }
         }
     }

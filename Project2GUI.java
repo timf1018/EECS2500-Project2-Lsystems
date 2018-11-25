@@ -243,47 +243,52 @@ public class Project2GUI extends JFrame implements ActionListener {
             // rules.add...
             //for(int i = 0; i < Integer.parseInt(iterationSpinner.getValue().toString()); i++){
 
-           // }
+            // }
             // or
             // call expansion(inputVal, iterations)
 
-
-
+            int iterationCount = Integer.parseInt(iterationSpinner.getValue().toString());
+            String inputVal = startSymbol.getText();
+                    expansion(inputVal, iterationCount,queue);
             // rules.processRules
-            System.out.println(expansion("F+L+T",Integer.parseInt(iterationSpinner.getValue().toString())));
+            System.out.println(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
             // output using drawingcanvas
 
             //getting the data from the processing
-            myCanvas.setDrawString("F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F+F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F+F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F");
+            myCanvas.setDrawString(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
             System.out.println("Number of iterations = " + iterationSpinner.getValue());
             myCanvas.repaint();
         }
     }
 
-    public String expansion(String inputval, int iterationCount) {
+    public String expansion(String inputval, int iterationCount, Queue rules) {
         String result = "";
         char[] chars = inputval.toCharArray();
         for (int i = 0, n = chars.length; i < n; i++) {
             char c = chars[i];
-          //  System.out.println("comparing" + c);
+            //  System.out.println("comparing" + c);
             // create another loop to iterate through rules
             boolean charMatched = false;
             for (int j = 0; j < 5; j++) {
-                char[] leftChar = lhs[j].getText().trim().toUpperCase().toCharArray();
+                Rule compareRule = rules.remove();
+                //Rule compareRule = new Rule(rules.remove().getLeftArea(),rules.remove().getRightArea());
+                char[] leftChar = compareRule.getLeftArea().toCharArray();
                 char d = leftChar[0];
-              //  System.out.println("Rules being compared:" + d);
+                //  System.out.println("Rules being compared:" + d);
                 if (c == d) {
-                   // System.out.println(c + "=" + d);
+                    // System.out.println(c + "=" + d);
                     // matches this rule, so expand by replacing with rule right side.
-                   // System.out.println(rhs[j].getText().trim().toUpperCase());
-                    result = result + rhs[j].getText().trim().toUpperCase();
-                    //System.out.println(result);
+                    // System.out.println(rhs[j].getText().trim().toUpperCase());
+                    result = result + compareRule.getRightArea();
+
                     charMatched = true;
                 } else {
                     // unchanged char value from input
                     //result = result + c;
                 }
                 //System.out.println(result);
+                rules.add(compareRule);
+
             }
             if (!charMatched) {
                 result = result + c;
@@ -292,7 +297,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         }
         iterationCount--;
         if (iterationCount > 0) {
-           result = this.expansion(result, iterationCount);
+            result = this.expansion(result, iterationCount,rules);
         }
         return result;
     }
