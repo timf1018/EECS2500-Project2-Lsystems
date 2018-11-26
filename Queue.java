@@ -2,43 +2,44 @@ import java.util.NoSuchElementException;
 
 public class Queue {
 
-    private Rule[] queue;
+    private String[] textC;
     private int front;
     private int back;
 
     public Queue(int capacity){
-        queue = new Rule[capacity];
+        textC = new String[capacity];
     }
-    public void add(Rule rule){
-        if (back == queue.length){
-            Rule[] newArray = new Rule[2 * queue.length];
-            System.arraycopy(queue,0,newArray,0,queue.length);
-            queue = newArray;
+    public void add(String text){
+        if (back == textC.length){
+            String[] newArray = new String[2 * textC.length];
+            System.arraycopy(textC,0,newArray,0,textC.length);
+            textC = newArray;
         }
-        queue[back] = rule;
+        textC[back] = text;
         back++;
     }
-    public Rule remove(){
+
+    public String remove(){
         if(size() == 0){
             throw new NoSuchElementException();
         }
-        Rule rule = queue[front];
-        queue[front] = null;
+        String textR = textC[front];
+        textC[front] = null;
         front++;
         if(size() == 0){
             front = 0;
             back = 0;
         }
 
-        return rule;
+        return textR;
     }
 
-    public Rule peek(){
+    public String peek(){
         if(size() == 0){
             throw new NoSuchElementException();
         }
 
-        return queue[front];
+        return textC[front];
     }
 
     public int size(){
@@ -46,7 +47,7 @@ public class Queue {
     }
     public void printQueue(){
         for(int i = front; i < back; i++){
-            System.out.println(queue[i]);
+            System.out.println(textC[i]);
         }
     }
 

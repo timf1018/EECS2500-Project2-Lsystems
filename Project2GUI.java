@@ -230,13 +230,19 @@ public class Project2GUI extends JFrame implements ActionListener {
 
             }
 
-            Queue queue = new Queue(5);
+            Rule[] rulearray = new Rule[5];
             // create the queue object
             for (int i = 0; i < 5; i++) {
                 Rule newRule = new Rule(lhs[i].getText().trim().toUpperCase(), rhs[i].getText().trim().toUpperCase());
-                queue.add(newRule);
+                rulearray[i] = newRule;
                 //System.out.println("adding " + "left side " + lhs[i].getText().trim().toUpperCase()+ " to queue" );
             }
+
+
+
+            LSystem lSystem = new LSystem(rulearray,Double.parseDouble(angle.getText()),
+                    Integer.parseInt(iterationSpinner.getValue().toString()),startSymbol.getText());
+
 
             //queue.printQueue();
             // rules.addAngle();
@@ -247,21 +253,22 @@ public class Project2GUI extends JFrame implements ActionListener {
             // or
             // call expansion(inputVal, iterations)
 
-            int iterationCount = Integer.parseInt(iterationSpinner.getValue().toString());
+          /*  int iterationCount = Integer.parseInt(iterationSpinner.getValue().toString());
             String inputVal = startSymbol.getText();
                     expansion(inputVal, iterationCount,queue);
             // rules.processRules
             System.out.println(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
-            // output using drawingcanvas
-
+            // output using drawingcanvas*/
+           // System.out.println(lSystem.getResult());
             //getting the data from the processing
-            myCanvas.setDrawString(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
+           // myCanvas.setDrawString(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
+            myCanvas.setDrawString(lSystem.getResult());
             System.out.println("Number of iterations = " + iterationSpinner.getValue());
             myCanvas.repaint();
         }
     }
 
-    public String expansion(String inputval, int iterationCount, Queue rules) {
+   /* public String expansion(String inputval, int iterationCount, Queue rules) {
         String result = "";
         char[] chars = inputval.toCharArray();
         for (int i = 0, n = chars.length; i < n; i++) {
@@ -301,7 +308,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         }
         return result;
     }
-
+*/
 
     public static void main(String[] args) {
         Project2GUI project2 = new Project2GUI();

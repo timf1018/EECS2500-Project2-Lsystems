@@ -44,7 +44,7 @@ ArrayStack saveStackXY = new ArrayStack(20);
         currentAngle = 0.0;
 
         for (position = 0; position < drawString.length(); position++) {
-            System.out.println("Processing position x: " + currentPositionX + " y " + currentPositionY);
+            //System.out.println("Processing position x: " + currentPositionX + " y " + currentPositionY);
             if (drawString.charAt(position) == 'F') { // Draw 5 units along current direction
                 Line2D line = new Line2D.Double(currentPositionX, currentPositionY,
                         currentPositionX + 5.0 * Math.sin(currentAngle),
@@ -61,7 +61,7 @@ ArrayStack saveStackXY = new ArrayStack(20);
                     saveStackXY.push(currentPositionX);
                     saveStackXY.push(currentPositionY);
                     saveStackAngle.push(currentAngle);
-                    System.out.println("Angle pushed = " + currentAngle);
+                    //System.out.println("Angle pushed = " + currentAngle);
                     //System.out.println(position + " was pushed to position");
                 }
                 catch (StackOverflowException ex){
@@ -76,7 +76,7 @@ ArrayStack saveStackXY = new ArrayStack(20);
                     saveStackXY.pop();
                     currentAngle = Double.parseDouble(saveStackAngle.top().toString());
                     saveStackAngle.pop();
-                    System.out.println("Angle popped = " + currentAngle);
+                    //System.out.println("Angle popped = " + currentAngle);
                 }
                 catch (StackUnderflowException ex){
                     System.out.println("Stack underflow");
