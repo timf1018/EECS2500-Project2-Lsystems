@@ -1,17 +1,10 @@
+//Timothy Fisher
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- *
- */
 
-/**
- * @author Gerald Heuring
- * The GUI for Project 2 as we developed it in
- * class.  You may alter this code for use with Project 2.
- */
 public class Project2GUI extends JFrame implements ActionListener {
 
     protected JTextField lhs[], rhs[], angle, startSymbol;
@@ -31,27 +24,12 @@ public class Project2GUI extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    /**
-     * buildGUI builds the graphics components that make up
-     * our GUI for Project 2.  It returns a panel that contains
-     * all of the components.  It also hooks up the Draw Button
-     * with this object as an actionListener.
-     *
-     * @return JPanel with the GUI.
-     */
+
     private JPanel buildGUI() {
         JPanel ourGUI = new JPanel();
         GridBagConstraints gbc = new GridBagConstraints();
 
         ourGUI.setLayout(new GridBagLayout());
-        /*
-         * Allocate the widgets and add them to the GUI.  I've
-         * changed this to use a gridBagLayout to allow us a better
-         * way to arrange the GUI.
-         *
-         * The routine is too long.  It should be shortened
-         * and simplified.  We will do this to it in class.
-         */
 
 
         buildAngle(ourGUI, gbc);
@@ -88,7 +66,6 @@ public class Project2GUI extends JFrame implements ActionListener {
         myCanvas = new DrawingCanvas();
         myCanvas.setAngleIncrement(90.0);
         myCanvas.setDrawString("F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F");
-//		myCanvas.setDrawString("F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F+F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F+F+F-F-F+F+F+F-F-F+F-F+F-F-F+F-F+F-F-F+F+F+F-F-F+F");
         gbc.gridx = 0;
         gbc.gridy = 10;
         gbc.gridwidth = 10;
@@ -98,12 +75,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         return ourGUI;
     }
 
-    /**
-     * The label and textfield for the start symbol
-     *
-     * @param ourGUI The panel to which the items are to be added.
-     * @param gbc    The GridBagConstraint for this item -- should be removed -- local.
-     */
+
     private void buildStartSymbol(JPanel ourGUI, GridBagConstraints gbc) {
         startLabel = new JLabel("Start Symbol: ");
         startSymbol = new JTextField(2);
@@ -116,12 +88,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.NONE;
     }
 
-    /**
-     * Build the label and text field for the angle input.
-     *
-     * @param ourGUI The panel that the items are to be added to.
-     * @param gbc    The GridBagConstraint for this item -- should be removed -- local.
-     */
+
     private void buildAngle(JPanel ourGUI, GridBagConstraints gbc) {
         angleLabel = new JLabel("Angle: ");
         angle = new JTextField(4);
@@ -136,13 +103,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.NONE;
     }
 
-    /**
-     * Build the spinner that controls the number of times the Productions get
-     * expanded.  Add it to the given JPanel.
-     *
-     * @param ourGUI The panel that the Spinner is to be added to.
-     * @param gbc    The gridBagConstraint for this item -- should be removed -- local.
-     */
+
     private void buildSpinner(JPanel ourGUI, GridBagConstraints gbc) {
         spinnerLabel = new JLabel("Number of Iterations: ");
         gbc.gridx = 8;
@@ -158,13 +119,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.NONE;
     }
 
-    /**
-     * Build the fields for the rules into the JPanel given.
-     *
-     * @param ourGUI The panel that the rules are to be added to...
-     * @param gbc    The gridBagConstraint for this panel -- should be removed.
-     * @param i      The number of the rule that we are adding.
-     */
+
     private void buildRules(JPanel ourGUI, GridBagConstraints gbc, int i) {
         ruleLabels[i] = new JLabel("Rule " + i + " : ");
         gbc.gridx = 1;
@@ -181,21 +136,10 @@ public class Project2GUI extends JFrame implements ActionListener {
         ourGUI.add(rhs[i], gbc);
     }
 
-    /**
-     * grab actions and react to them....  This will be
-     * used to detect the press of the draw button and
-     * gather the information from the different fields.
-     * <p>
-     * I've added code to pop up dialogs for various problems that
-     * may occur with the data.  The tests on the data are not
-     * complete.  They handle a number of simple errors.
-     */
+
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == drawButton) {
-            /*
-             * Right now we will print out the state of
-             * all the input fields...
-             */
+
             for (int i = 0; i < 5; i++) {
                 System.out.println("Rule " + i + ": " + lhs[i].getText() +
                         " -> " + rhs[i].getText());
@@ -230,95 +174,28 @@ public class Project2GUI extends JFrame implements ActionListener {
 
             }
 
-            Rule[] rulearray = new Rule[5];
-            // create the queue object
+            Rule[] ruleArray = new Rule[5];
+            // Filling the Rule Array
             for (int i = 0; i < 5; i++) {
                 String leftSide = lhs[i].getText().trim().toUpperCase();
                 String rightSide =  rhs[i].getText().trim().toUpperCase();
-
-/*                if (!(leftSide.equals("")  || leftSide == null)) {
-                    continue;
-                }
-                if (rightSide.equals("") || rightSide == null) {
-                    continue;
-                }*/
-
                 Rule newRule = new Rule(leftSide, rightSide);
-                rulearray[i] = newRule;
-                //System.out.println("adding " + "left side " + lhs[i].getText().trim().toUpperCase()+ " to queue" );
+                ruleArray[i] = newRule;
             }
 
 
 
-            LSystem lSystem = new LSystem(rulearray,Double.parseDouble(angle.getText()),
+            LSystem lSystem = new LSystem(ruleArray,Double.parseDouble(angle.getText()),
                     Integer.parseInt(iterationSpinner.getValue().toString()),startSymbol.getText());
 
 
-            //queue.printQueue();
-            // rules.addAngle();
-            // rules.add...
-            //for(int i = 0; i < Integer.parseInt(iterationSpinner.getValue().toString()); i++){
 
-            // }
-            // or
-            // call expansion(inputVal, iterations)
-
-          /*  int iterationCount = Integer.parseInt(iterationSpinner.getValue().toString());
-            String inputVal = startSymbol.getText();
-                    expansion(inputVal, iterationCount,queue);
-            // rules.processRules
-            System.out.println(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
-            // output using drawingcanvas*/
-           // System.out.println(lSystem.getResult());
-            //getting the data from the processing
-           // myCanvas.setDrawString(expansion(inputVal, Integer.parseInt(iterationSpinner.getValue().toString()),queue));
             myCanvas.setDrawString(lSystem.getResult());
             System.out.println("Number of iterations = " + iterationSpinner.getValue());
             myCanvas.repaint();
         }
     }
 
-   /* public String expansion(String inputval, int iterationCount, Queue rules) {
-        String result = "";
-        char[] chars = inputval.toCharArray();
-        for (int i = 0, n = chars.length; i < n; i++) {
-            char c = chars[i];
-            //  System.out.println("comparing" + c);
-            // create another loop to iterate through rules
-            boolean charMatched = false;
-            for (int j = 0; j < 5; j++) {
-                Rule compareRule = rules.remove();
-                //Rule compareRule = new Rule(rules.remove().getLeftArea(),rules.remove().getRightArea());
-                char[] leftChar = compareRule.getLeftArea().toCharArray();
-                char d = leftChar[0];
-                //  System.out.println("Rules being compared:" + d);
-                if (c == d) {
-                    // System.out.println(c + "=" + d);
-                    // matches this rule, so expand by replacing with rule right side.
-                    // System.out.println(rhs[j].getText().trim().toUpperCase());
-                    result = result + compareRule.getRightArea();
-
-                    charMatched = true;
-                } else {
-                    // unchanged char value from input
-                    //result = result + c;
-                }
-                //System.out.println(result);
-                rules.add(compareRule);
-
-            }
-            if (!charMatched) {
-                result = result + c;
-            }
-            charMatched = false;
-        }
-        iterationCount--;
-        if (iterationCount > 0) {
-            result = this.expansion(result, iterationCount,rules);
-        }
-        return result;
-    }
-*/
 
     public static void main(String[] args) {
         Project2GUI project2 = new Project2GUI();
