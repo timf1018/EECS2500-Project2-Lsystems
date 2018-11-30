@@ -1,4 +1,5 @@
 //Timothy Fisher
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -161,13 +162,13 @@ public class Project2GUI extends JFrame implements ActionListener {
             // Filling the Rule Array
             for (int i = 0; i < 5; i++) {
                 String leftSide = lhs[i].getText().trim().toUpperCase();
-                String rightSide =  rhs[i].getText().trim().toUpperCase();
+                String rightSide = rhs[i].getText().trim().toUpperCase();
                 Rule newRule = new Rule(leftSide, rightSide);
                 ruleArray[i] = newRule;
             }
 
-            LSystem lSystem = new LSystem(ruleArray,Double.parseDouble(angle.getText()),
-                    Integer.parseInt(iterationSpinner.getValue().toString()),startSymbol.getText());
+            LSystem lSystem = new LSystem(ruleArray, Double.parseDouble(angle.getText()),
+                    Integer.parseInt(iterationSpinner.getValue().toString()), startSymbol.getText());
 
             myCanvas.setDrawString(lSystem.getResult());
             System.out.println("Number of iterations = " + iterationSpinner.getValue());

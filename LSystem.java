@@ -1,3 +1,4 @@
+//Timothy Fisher
 public class LSystem {
 
     private Rule[] rules;
@@ -33,7 +34,7 @@ public class LSystem {
     public String getResult() {
         // put start value on results queue
         char[] chars = this.startValue.toCharArray();
-        for (int i=0, n = chars.length; i < n; i++) {
+        for (int i = 0, n = chars.length; i < n; i++) {
             String symbol = Character.toString(chars[i]);
             resultsQueue.add(symbol);
         }
@@ -66,12 +67,11 @@ public class LSystem {
                 char[] leftChar = compareRule.getLeftArea().toCharArray();
                 char d = leftChar[0];
                 if (currentSymbol.equals(Character.toString(d))) {
-                    for(int i = 0; i<compareRule.getRightArea().length();i++){
+                    for (int i = 0; i < compareRule.getRightArea().length(); i++) {
                         resultsQueue.add(Character.toString(compareRule.getRightArea().toString().charAt(i)));
                     }
                     charMatched = true;
-                }
-                else {
+                } else {
                     System.out.println("no rule match");
                 }
             }

@@ -5,8 +5,9 @@ import java.awt.geom.Line2D;
 public class DrawingCanvas extends Canvas {
     protected String drawString;
     protected double angleIncrement;
-ArrayStack saveStackXY = new ArrayStack(20);
+    ArrayStack saveStackXY = new ArrayStack(20);
     ArrayStack saveStackAngle = new ArrayStack(20);
+
     DrawingCanvas() {
         this.setPreferredSize(new Dimension(400, 400));
     }
@@ -18,7 +19,6 @@ ArrayStack saveStackXY = new ArrayStack(20);
     public void setAngleIncrement(double d) {
         angleIncrement = Math.PI * d / 180.0;
     }
-
 
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -47,9 +47,7 @@ ArrayStack saveStackXY = new ArrayStack(20);
                     saveStackXY.push(currentPositionX);
                     saveStackXY.push(currentPositionY);
                     saveStackAngle.push(currentAngle);
-
-                }
-                catch (StackOverflowException ex){
+                } catch (StackOverflowException ex) {
                     System.out.println("Stack overflow");
                 }
 
@@ -61,12 +59,9 @@ ArrayStack saveStackXY = new ArrayStack(20);
                     saveStackXY.pop();
                     currentAngle = Double.parseDouble(saveStackAngle.top().toString());
                     saveStackAngle.pop();
-
-                }
-                catch (StackUnderflowException ex){
+                } catch (StackUnderflowException ex) {
                     System.out.println("Stack underflow");
                 }
-
             }
         }
     }
