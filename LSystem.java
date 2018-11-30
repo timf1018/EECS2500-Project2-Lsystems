@@ -62,8 +62,6 @@ public class LSystem {
                     continue;
                 }
 
-                System.out.println("For symbol - " + currentSymbol);
-                System.out.println("Trying Rule - " + rules[j].getLeftArea());
                 Rule compareRule = rules[j];
                 char[] leftChar = compareRule.getLeftArea().toCharArray();
                 char d = leftChar[0];

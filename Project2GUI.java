@@ -11,26 +11,20 @@ public class Project2GUI extends JFrame implements ActionListener {
     protected JButton drawButton;
     protected JSpinner iterationSpinner;
     protected JLabel ruleLabels[], angleLabel, startLabel, spinnerLabel;
-    protected String rhsValue[], lhsValue[];
     protected DrawingCanvas myCanvas;
 
     public Project2GUI() {
-        rhsValue = new String[5];
-        lhsValue = new String[5];
-
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(buildGUI());
         this.pack();
         this.setVisible(true);
     }
 
-
     private JPanel buildGUI() {
         JPanel ourGUI = new JPanel();
         GridBagConstraints gbc = new GridBagConstraints();
 
         ourGUI.setLayout(new GridBagLayout());
-
 
         buildAngle(ourGUI, gbc);
         buildStartSymbol(ourGUI, gbc);
@@ -42,9 +36,7 @@ public class Project2GUI extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         ourGUI.add(drawButton, gbc);
 
-
         buildSpinner(ourGUI, gbc);
-
 
         lhs = new JTextField[5];
         rhs = new JTextField[5];
@@ -75,7 +67,6 @@ public class Project2GUI extends JFrame implements ActionListener {
         return ourGUI;
     }
 
-
     private void buildStartSymbol(JPanel ourGUI, GridBagConstraints gbc) {
         startLabel = new JLabel("Start Symbol: ");
         startSymbol = new JTextField(2);
@@ -87,7 +78,6 @@ public class Project2GUI extends JFrame implements ActionListener {
         ourGUI.add(startSymbol, gbc);
         gbc.fill = GridBagConstraints.NONE;
     }
-
 
     private void buildAngle(JPanel ourGUI, GridBagConstraints gbc) {
         angleLabel = new JLabel("Angle: ");
@@ -103,7 +93,6 @@ public class Project2GUI extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.NONE;
     }
 
-
     private void buildSpinner(JPanel ourGUI, GridBagConstraints gbc) {
         spinnerLabel = new JLabel("Number of Iterations: ");
         gbc.gridx = 8;
@@ -118,7 +107,6 @@ public class Project2GUI extends JFrame implements ActionListener {
         ourGUI.add(iterationSpinner, gbc);
         gbc.fill = GridBagConstraints.NONE;
     }
-
 
     private void buildRules(JPanel ourGUI, GridBagConstraints gbc, int i) {
         ruleLabels[i] = new JLabel("Rule " + i + " : ");
@@ -136,15 +124,12 @@ public class Project2GUI extends JFrame implements ActionListener {
         ourGUI.add(rhs[i], gbc);
     }
 
-
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == drawButton) {
 
             for (int i = 0; i < 5; i++) {
                 System.out.println("Rule " + i + ": " + lhs[i].getText() +
                         " -> " + rhs[i].getText());
-                rhsValue[i] = rhs[i].getText().trim().toUpperCase();
-                lhsValue[i] = lhs[i].getText().trim().toUpperCase();
             }
             System.out.println("Start Symbol = " + startSymbol.getText());
             String ourStartSymbol = startSymbol.getText();
@@ -159,7 +144,6 @@ public class Project2GUI extends JFrame implements ActionListener {
                         "You must have a start symbol!  No start symbol found.",
                         "Start Symbol Error",
                         JOptionPane.ERROR_MESSAGE);
-
             }
 
             System.out.println("Angle = " + angle.getText());
@@ -171,7 +155,6 @@ public class Project2GUI extends JFrame implements ActionListener {
                         "Angle must be a valid floating point number.  Try again.",
                         "Angle Error",
                         JOptionPane.ERROR_MESSAGE);
-
             }
 
             Rule[] ruleArray = new Rule[5];
@@ -183,12 +166,8 @@ public class Project2GUI extends JFrame implements ActionListener {
                 ruleArray[i] = newRule;
             }
 
-
-
             LSystem lSystem = new LSystem(ruleArray,Double.parseDouble(angle.getText()),
                     Integer.parseInt(iterationSpinner.getValue().toString()),startSymbol.getText());
-
-
 
             myCanvas.setDrawString(lSystem.getResult());
             System.out.println("Number of iterations = " + iterationSpinner.getValue());
@@ -196,12 +175,8 @@ public class Project2GUI extends JFrame implements ActionListener {
         }
     }
 
-
     public static void main(String[] args) {
         Project2GUI project2 = new Project2GUI();
-
-
     }
-
 
 }
