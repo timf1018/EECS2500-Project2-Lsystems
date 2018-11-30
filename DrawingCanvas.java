@@ -40,7 +40,7 @@ ArrayStack saveStackXY = new ArrayStack(20);
         double currentAngle;
 
         currentPositionX = 200;
-        currentPositionY = 200;
+        currentPositionY = 0;
         currentAngle = 0.0;
 
         for (position = 0; position < drawString.length(); position++) {

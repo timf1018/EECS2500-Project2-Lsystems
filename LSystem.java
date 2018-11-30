@@ -64,6 +64,16 @@ public class LSystem {
             //System.out.println("Processing symbol - " + currentSymbol);
             boolean charMatched = false;
             for (int j = 0; j < rules.length; j++) {
+
+
+                if (rules[j].getLeftArea() == null || rules[j].getLeftArea().trim().equals("")) {
+                    continue;
+                }
+                if (rules[j].getRightArea() == null || rules[j].getRightArea().trim().equals("")) {
+                    continue;
+                }
+
+
                 System.out.println("For symbol - " + currentSymbol);
                 System.out.println("Trying Rule - " + rules[j].getLeftArea());
                 Rule compareRule = rules[j];

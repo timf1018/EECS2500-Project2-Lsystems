@@ -233,7 +233,17 @@ public class Project2GUI extends JFrame implements ActionListener {
             Rule[] rulearray = new Rule[5];
             // create the queue object
             for (int i = 0; i < 5; i++) {
-                Rule newRule = new Rule(lhs[i].getText().trim().toUpperCase(), rhs[i].getText().trim().toUpperCase());
+                String leftSide = lhs[i].getText().trim().toUpperCase();
+                String rightSide =  rhs[i].getText().trim().toUpperCase();
+
+/*                if (!(leftSide.equals("")  || leftSide == null)) {
+                    continue;
+                }
+                if (rightSide.equals("") || rightSide == null) {
+                    continue;
+                }*/
+
+                Rule newRule = new Rule(leftSide, rightSide);
                 rulearray[i] = newRule;
                 //System.out.println("adding " + "left side " + lhs[i].getText().trim().toUpperCase()+ " to queue" );
             }
