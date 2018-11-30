@@ -34,15 +34,12 @@ public class LSystem {
         // put start value on results queue
         char[] chars = this.startValue.toCharArray();
         for (int i=0, n = chars.length; i < n; i++) {
-            System.out.println("adding to results queue - " + chars[i]);
             String symbol = Character.toString(chars[i]);
-            System.out.println("Symbol - " + symbol);
             resultsQueue.add(symbol);
         }
         resultsQueue.add("/");
         // start expansion process
         this.performExpansion();
-
         // Build final result string
         String result = "";
         String currentSymbol;
@@ -53,18 +50,10 @@ public class LSystem {
     }
 
     public void performExpansion() {
-        //String result = "";
-
         String currentSymbol;
         while (!(currentSymbol = resultsQueue.remove()).equals("/")) {
-            // for (int i = 0, n = chars.length; i < n; i++) {
-            //      char c = chars[i];
-            //  System.out.println("comparing" + c);
-            // create another loop to iterate through rules
-            //System.out.println("Processing symbol - " + currentSymbol);
             boolean charMatched = false;
             for (int j = 0; j < rules.length; j++) {
-
 
                 if (rules[j].getLeftArea() == null || rules[j].getLeftArea().trim().equals("")) {
                     continue;
@@ -73,14 +62,12 @@ public class LSystem {
                     continue;
                 }
 
-
                 System.out.println("For symbol - " + currentSymbol);
                 System.out.println("Trying Rule - " + rules[j].getLeftArea());
                 Rule compareRule = rules[j];
                 char[] leftChar = compareRule.getLeftArea().toCharArray();
                 char d = leftChar[0];
                 if (currentSymbol.equals(Character.toString(d))) {
-                    System.out.println("Found rule match");
                     for(int i = 0; i<compareRule.getRightArea().length();i++){
                         resultsQueue.add(Character.toString(compareRule.getRightArea().toString().charAt(i)));
                     }
@@ -104,8 +91,6 @@ public class LSystem {
         if (this.iterationCount > 0) {
             this.performExpansion();
         }
-        //return result;
     }
-
 
 }
